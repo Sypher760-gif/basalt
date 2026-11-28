@@ -239,12 +239,6 @@ constexpr int kFoldNb = kDsRank / 32;   // 8
 constexpr int kFoldRow = kFoldNb * kQ8Block;
 constexpr int kTilesPerBlock = 4;       // the fold pass: a warp per tile of 32 rows
 
-struct Q81 {
-    half2 ds;
-    int8_t qs[32];
-};
-static_assert(sizeof(Q81) == 36, "ggml's block_q8_1");
-
 __device__ __forceinline__ float capf(float x, float cap) {
     if (cap <= 0.f) return x;
     return cap * tanhf(x / cap);
